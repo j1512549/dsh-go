@@ -24,6 +24,7 @@ import '../shell/quick_panel.dart';
 import '../theme/app_icons.dart';
 import '../theme/theme.dart';
 import '../web/dsh_web_launcher.dart';
+import '../web/external_web.dart';
 import 'quick_panel_items_sheet.dart';
 import 'settings_widgets.dart';
 
@@ -38,6 +39,12 @@ class InterfacePage extends ConsumerWidget {
   /// The new home takes over from the bottom of the stack (this page closes
   /// with the rest; the way back is the new home).
   static void choose(BuildContext context, WidgetRef ref, UiMode mode) {
+    // 网页版 is no longer the app's home: the page opens in the system browser
+    // and the native interface stays behind it.
+    if (mode == UiMode.web) {
+      unawaited(openLocalWebExternally(context, ref));
+      return;
+    }
     if (mode == ref.read(uiModeProvider).mode) return;
     Navigator.of(context, rootNavigator: true).popUntil((route) => route.isFirst);
     unawaited(ref.read(uiModeProvider.notifier).set(mode));
