@@ -18,6 +18,7 @@ import '../shell/home_shell.dart';
 import '../shell/page_frame.dart';
 import '../theme/app_icons.dart';
 import '../theme/theme.dart';
+import 'external_web.dart';
 import 'web_home.dart';
 import 'web_target.dart';
 
@@ -91,7 +92,7 @@ class WebModeKey extends ConsumerWidget {
       tooltip: context.l10n.webSwitchToWeb,
       size: size,
       tier: tier,
-      onPressed: () => unawaited(ref.read(uiModeProvider.notifier).set(UiMode.web)),
+      onPressed: () => unawaited(openLocalWebExternally(context, ref)),
     );
   }
 }
