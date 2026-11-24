@@ -1,0 +1,116 @@
+name: apk
+
+# 只出一种包：arm64 debug APK，手动触发。
+# 运行环境（runtime）不在这里编译：直接从官方同版本 APK 里取，再按 manifest 校验一遍。
+# 其余平台（iOS / OHOS / 单元测试）的工作流已从本分支删除，避免一次提交起多套。
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: apk-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  FLUTTER_VERSION: 3.47.7
+  GRADLE_VERSION: 9.3.1
+  TZ: Asia/Shanghai
+  DSH_MAVEN_MIRRORS: 0
+  OFFICIAL_TAG: v1.3.0
+  OFFICIAL_APK: dsh-go-1.3.0-arm64.apk
+
+jobs:
+  apk:
+    name: Android arm64
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+
+      - name: Pub get and local.properties
+        working-directory: app
+        run: |
+          flutter pub get --enforce-lockfile
+          printf 'sdk.dir=%s\nflutter.sdk=%s\n' "$ANDROID_HOME" "$FLUTTER_ROOT" > android/local.properties
+
+      - name: Download the official APK of the same version
+        run: |
+          curl -fL --retry 3 --retry-delay 2 -o "$RUNNER_TEMP/official.apk" \
+            "https://github.com/ccch1mneyyy/dsh-go/releases/download/$OFFICIAL_TAG/$OFFICIAL_APK"
+          ls -lh "$RUNNER_TEMP/official.apk"
+
+      - name: Restore the runtime bundle from the official APK
+        env:
+          OFFICIAL: ${{ runner.temp }}/official.apk
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib, shutil, zipfile
+
+          apk = os.environ["OFFICIAL"]
+          out = pathlib.Path("runtime/out/arm64-v8a")
+          assets = out / "assets" / "runtime"
+          jni = out / "jniLibs" / "arm64-v8a"
+          taw = pathlib.Path("runtime/out-tawcroot/jniLibs/arm64-v8a")
+          for d in (assets, jni, taw):
+              d.mkdir(parents=True, exist_ok=True)
+
+          with zipfile.ZipFile(apk) as z:
+              names = z.namelist()
+              manifest = json.loads(z.read("assets/runtime/manifest.json"))
+              abi = manifest["abi"]
+              if abi != "arm64-v8a":
+                  raise SystemExit(f"unexpected ABI in manifest: {abi}")
+              for name in names:
+                  if not name.startswith("assets/runtime/") or name.endswith("/"):
+                      continue
+                  rel = name[len("assets/runtime/"):]
+                  target = assets / rel
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  with z.open(name) as src, open(target, "wb") as dst:
+                      shutil.copyfileobj(src, dst)
+              libs = list(manifest["jniLibs"].keys())
+              for lib in libs:
+                  src_path = f"lib/{abi}/{lib}"
+                  if src_path not in names:
+                      raise SystemExit(f"missing {src_path} in the official APK")
+                  with z.open(src_path) as src, open(jni / lib, "wb") as dst:
+                      shutil.copyfileobj(src, dst)
+              tawcroot = f"lib/{abi}/libtawcroot.so"
+              if tawcroot in names:
+                  with z.open(tawcroot) as src, open(taw / "libtawcroot.so", "wb") as dst:
+                      shutil.copyfileobj(src, dst)
+              print(f"assets: {len([n for n in names if n.startswith('assets/runtime/')])} entries, jniLibs: {len(libs)}, tawcroot: {tawcroot in names}")
+          PY
+
+      - name: Verify the runtime bundle
+        run: python3 -I tooling/check_runtime_bundle.py arm64
+
+      - name: Analyze the touched sources
+        working-directory: app
+        run: dart analyze lib/ui/web/ lib/ui/settings/interface_page.dart
+
+      - name: Build arm64 debug APK
+        working-directory: app
+        run: flutter build apk --debug --flavor arm64 --target-platform android-arm64
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dsh-go-debug-arm64
+          path: app/build/app/outputs/flutter-apk/*.apk
+          if-no-files-found: error
