@@ -1,6 +1,12 @@
 # One patch per line, in application order. Keep every .diff exactly once.
 # HarmonyOS-only overlays (pins.json targetSets.ohos), after the whole common chain.
+
+cordis-effect-dispose-completion.diff
+credentials-decimal-refs.diff
+fs-create-exclusive.diff
+install-log-redaction.diff
 piai-anthropic-opus55-thinking.diff
+piai-google-openai-store.diff
 plugin-manager-active-run-guard.diff
 preset-legacy-delegation.diff
 route-guard.diff
@@ -48,6 +54,7 @@ zzzzzzzzz-plugin-detail-body-cancel.diff
 zzzzzzzzz-plugin-manager-metadata-inventory.diff
 zzzzzzzzz-prompt-admission.diff
 zzzzzzzzz-schedule-run-cancel.diff
+zzzzzzzzz-session-event-admission.diff
 zzzzzzzzz-session-id-membership.diff
 zzzzzzzzz-session-live-fingerprint.diff
 zzzzzzzzz-stats-attempt-token.diff
@@ -55,10 +62,12 @@ zzzzzzzzz-subprocess-idle-read.diff
 zzzzzzzzz-subprocess-utf8-cursor.diff
 zzzzzzzzz-subprocess-zsingle-read.diff
 zzzzzzzzz-subprocess-zzspill-write-all.diff
+zzzzzzzzz-subprocess-zzzero-tail.diff
 zzzzzzzzz-terminal-tail.diff
 zzzzzzzzz-tool-history-lookup.diff
 zzzzzzzzz-workspace-domain-close.diff
 zzzzzzzzzz-session-export-descendant-refs.diff
+zzzzzzzzzz-terminal-readiness-clock.diff
 zzzzzzzzzz-workspace-watch-error.diff
 zzzzzzzzzzz-plugin-update-precondition.diff
 zzzzzzzzzzzz-plan-pending-restore.diff
@@ -82,7 +91,9 @@ zzzzzzzzzzzzzzzzzzzzzzzzzzzzz-attachment-staging-error.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-reference-retention-size.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-search-snippet-window.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-workspace-capture-recovery.diff
+zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-fs-parent-kind.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-fs-line-style.diff
+fs-create-link-denial.diff
 fs-publication-short-names.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-fs-patch-equal-width.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-instruction-encoding-reuse.diff
@@ -96,6 +107,8 @@ zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-session-preset-resume-errors.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-loader-entry-lifecycle.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-loader-group-own-key.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-phone-caller-bundle.diff
+zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-storage-json-postpublish.diff
+zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-credentials-record-own-key.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-piai-credential-wait-cancel.diff
 piai-discovery-response-cancel.diff
 attachment-direct-boundary.diff

@@ -1,0 +1,11 @@
+--- a/node_modules/@deepseek-ai/dsh-plugin-manager/lib/index.js
++++ b/node_modules/@deepseek-ai/dsh-plugin-manager/lib/index.js
+@@ -1,5 +1,7 @@
+ 			const jobId = randomUUID();
+-			const argv = ["pnpm", ...args];
++			// Log arguments are separate from execution arguments. Restrict userinfo
++			// matching to URL authority; support aliases and --registry=URL too.
++			const argv = ["pnpm", ...args.map((arg) => arg.replace(/((?:git\+)?https?:\/\/)[^/?#\s]*@/gi, "$1"))];
+ 			const cwd = this.profile.dir;
+ 			const identity = requestId === void 0 ? {} : { requestId };
+ 			const task = runProfilePnpm({
