@@ -10,7 +10,9 @@ String chatErrorText(Object error, {required String action}) {
   debugPrint('$action: $error');
   final reason = switch (error) {
     DshRemoteException(:final code) => switch (code) {
-      'session/agent-busy' => appL10n.stateChatAgentBusy,
+      // Diagnostic build: show the engine's own rejection reason, which the
+      // plain text intentionally hides.
+      'session/agent-busy' => _withEngineDetail(appL10n.stateChatAgentBusy, error),
       'session/writer-held' => appL10n.stateChatWriterHeld,
       'session/model-unavailable' || 'session/provider-models-unavailable' => appL10n.stateChatModelUnavailable,
       'session/attachment-invalid' => appL10n.stateChatAttachmentInvalid,
@@ -29,4 +31,16 @@ String chatErrorText(Object error, {required String action}) {
     _ => engineErrorReason(error),
   };
   return reason == null ? action : appL10n.stateActionReason(action, reason);
+}
+
+/// Diagnostic build only: append the engine's `reason` detail so a rejection
+/// such as `session/agent-busy` says why instead of just "busy".
+String _withEngineDetail(String text, Object error) {
+  if (error is! DshRemoteException) return text;
+  final raw = error.details['reason'];
+  if (raw == null) return text;
+  final detail = raw.toString().replaceAll(RegExp(r'\s+'), ' ').trim();
+  if (detail.isEmpty) return text;
+  final clipped = detail.length > 220 ? '${detail.substring(0, 220)}…' : detail;
+  return '$text（engine: $clipped）';
 }

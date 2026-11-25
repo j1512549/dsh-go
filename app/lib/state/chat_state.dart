@@ -1639,9 +1639,18 @@ class ChatController extends Notifier<ChatState> {
     final host = connection != null && identical(connection.client, operation.client)
         ? connection.kind.name
         : 'unknown';
+    // Diagnostic build: the engine's rejection reason must survive into the
+    // diagnostics bundle, otherwise every cause collapses into `remote_other`.
+    final detail = cause is DshRemoteException ? cause.details['reason'] : null;
+    final shortDetail = detail == null
+        ? ''
+        : detail.toString().replaceAll(RegExp(r'\s+'), ' ').trim();
+    final clippedDetail = shortDetail.length > 400 ? shortDetail.substring(0, 400) : shortDetail;
     appErrorLog.record(
       AppErrorSource.session,
-      'chat_send_failure stage=$stage host=$host category=$category outcome_unknown=${_outcomeUnknown(error)}',
+      'chat_send_failure stage=$stage host=$host category=$category '
+      'outcome_unknown=${_outcomeUnknown(error)}'
+      '${clippedDetail.isEmpty ? '' : ' reason=${jsonEncode(clippedDetail)}'}',
       StackTrace.empty,
     );
   }
