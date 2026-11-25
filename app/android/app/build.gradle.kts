@@ -19,6 +19,10 @@ val hasWholeReleaseKey = listOf("storeFile", "keyAlias").all { !keyProps.getProp
     listOf("storePassword", "keyPassword").all { !keyProps.getProperty(it).isNullOrEmpty() } &&
     file(keyProps.getProperty("storeFile")).exists()
 
+// The installed package name. The released app is dsh_app; these rc.5 builds install as
+// their own package so they sit next to it, with their own data dir.
+val appPackageId = "io.github.ccch1mneyyy.dsh_ppp"
+
 // Side-by-side test builds (tooling/build-apk.sh --side): their own package and launcher
 // name, so they install next to the released app instead of over it. Same signing key.
 val sideBuild = providers.environmentVariable("DSH_SIDE_BUILD").orNull == "1"
@@ -32,7 +36,7 @@ abstract class SideShortcuts : DefaultTask() {
 
     @TaskAction
     fun write() {
-        val main = "android:targetPackage=\"io.github.ccch1mneyyy.dsh_app\""
+        val main = "android:targetPackage=\"$appPackageId\""
         val text = source.get().asFile.readText()
         check(main in text) { "shortcuts.xml no longer names the package as $main" }
         val out = outputDir.get().asFile.resolve("xml")
@@ -72,7 +76,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "io.github.ccch1mneyyy.dsh_app"
+        applicationId = appPackageId
         if (sideBuild) applicationIdSuffix = sideSuffix
         manifestPlaceholders["appLabel"] = if (sideBuild) "DSH Go 测试" else "DSH Go"
         // java.nio.file (symlinks while unpacking the rootfs) needs API 26.
