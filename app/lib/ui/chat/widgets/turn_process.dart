@@ -76,7 +76,11 @@ class _TurnProcessState extends State<TurnProcess> with SingleTickerProviderStat
     parent: _reveal,
     curve: const Interval(0.3, 1, curve: Curves.easeOut),
   );
-  final _body = GlobalKey();
+  /// The measured body's build context. A [GlobalKey] cannot hold this slot:
+  /// the settling and settled branches mount the body under different parents,
+  /// and reparenting a GlobalKey in the same frame trips the framework's
+  /// inactive-element assertion. A captured context has no such identity.
+  BuildContext? _bodyContext;
 
   /// 已经补进滚动位置的高度(内容在动画途中还可能变高,按高度记账)。
   double _held = 0;
@@ -130,7 +134,8 @@ class _TurnProcessState extends State<TurnProcess> with SingleTickerProviderStat
   /// 位置里扣掉。内容高度要等第一次布局后才知道,那之前先记着,帧后再补。
   void _holdHeader() {
     if (!mounted || _settling) return;
-    final box = _body.currentContext?.findRenderObject() as RenderBox?;
+    final probe = _bodyContext;
+    final box = probe != null && probe.mounted ? probe.findRenderObject() as RenderBox? : null;
     if (box == null || !box.hasSize) {
       if (_factor.value > 0) {
         SchedulerBinding.instance.addPostFrameCallback((_) => _holdHeader());
@@ -211,7 +216,10 @@ class _TurnProcessState extends State<TurnProcess> with SingleTickerProviderStat
             alignment: AlignmentDirectional.topCenter,
             child: FadeTransition(
               opacity: _fade,
-              child: KeyedSubtree(key: _body, child: body()),
+              child: Builder(builder: (context) {
+                _bodyContext = context;
+                return body();
+              }),
             ),
           ),
         ],
@@ -229,9 +237,11 @@ class _TurnProcessState extends State<TurnProcess> with SingleTickerProviderStat
             child: FadeTransition(
               opacity: _fade,
               child: Padding(
-                key: _body,
                 padding: const EdgeInsets.only(top: 4, bottom: 4),
-                child: StreamThread(child: body()),
+                child: StreamThread(child: Builder(builder: (context) {
+                  _bodyContext = context;
+                  return body();
+                })),
               ),
             ),
           ),
