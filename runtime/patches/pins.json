@@ -938,6 +938,46 @@
         }
       }
     },
+    "z-direct-runtime.diff": {
+      "0.2.2-rc.5": {
+        "node_modules/@deepseek-ai/dsh-api-session-controller/lib/index.js": {
+          "after": "49175e52d0602d39a08666a5f84459873013bd7bc2cb27a8736868f8311128f8",
+          "before": "1e4b8e4afbf3f870f86cd2817da318f6895b90a54026893e304e6a4f13f6dae8"
+        },
+        "node_modules/@deepseek-ai/dsh-app-boot/lib/index.js": {
+          "after": "d6c05cca01d1ccf11db3df587cb789e73e36ab65c12fb6b80680057ed6bee767",
+          "before": "e89997d3f0cd237c3849a3832337c92e1818afa02d687c53f9595e1d2726805f"
+        },
+        "node_modules/@deepseek-ai/dsh-fs-local/lib/index.js": {
+          "after": "a3b4affac7e34da5ed6cb7aeca335ed401f0d49cd7b89da1dcdaedc1fd42a15f",
+          "before": "c004ad2c8011923c9cc5a532b7e43d7e5d463c10ad77fb0edd26b7e74f312bda"
+        },
+        "node_modules/@deepseek-ai/dsh-home-paths/lib/index.js": {
+          "after": "b1ad9ebed6c9fa18b88c3ef4281e8cc07dc60323b171143da6d885e22b34d5f5",
+          "before": "9877a6117c5def69b61fae12f70a7a7400894a9dc4a9f7069ce4cc58aeb66e9d"
+        },
+        "node_modules/@deepseek-ai/dsh-sandbox-policy/lib/index.js": {
+          "after": "12cecdcb1b3c198a0df4d1f625e7a75cac425bb52f941693093a4ecb4350c737",
+          "before": "6c229f24f4b9ad67790ab5c8d1695e1ed538c0354955494bedd0dbe836debec4"
+        },
+        "node_modules/@deepseek-ai/dsh-sandbox/lib/index.js": {
+          "after": "e9b1410a2f610e185f6e3c1843e9a35b95cb37cf54c8fa5ef57c66e4dbb90d42",
+          "before": "dcf74e4cea1a0dbd8bfeaa1b454619b55aab83f3b3b761f0534165f0ac05f138"
+        },
+        "node_modules/@deepseek-ai/dsh-skill-filesystem/lib/index.js": {
+          "after": "5000e40f6eb3b6416c741c8a7300d8427fb10a9a995649d3ed3cbe2e7d8bff5d",
+          "before": "996b09eeefebfd7ace5e4692b26d622f572bad3cc011ca1d974a70b3d4d0eebf"
+        },
+        "node_modules/@deepseek-ai/dsh-subprocess-local/lib/index.js": {
+          "after": "db026628e177c3ca3dbb95ab7279f7b0c552dbf4baddc2ab3291180f5e90a9cf",
+          "before": "152b009a77e0b5f846af5a86b25a35346c9aca5f380c82054a35bde722500752"
+        },
+        "node_modules/@deepseek-ai/dsh-working-directory/lib/index.js": {
+          "after": "b4f460c58a4ee208d6cf4083e211180eac8532f54283a9b1bbbc8e4087129ef4",
+          "before": "03cb7ebdaa8b97cfc3170320d04446b99ce939349696289b49549d1e96cea59b"
+        }
+      }
+    },
     "z-plugin-install-log-utf8.diff": {
       "0.2.1-rc.4": {
         "node_modules/@deepseek-ai/dsh-plugin-manager/lib/index.js": {
@@ -3177,7 +3217,8 @@
       "profile-root-installation-precedence.diff",
       "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-phone-caller.diff",
       "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-phone-run-end.diff",
-      "z-companion-admission.diff"
+      "z-companion-admission.diff",
+      "z-direct-runtime.diff"
     ],
     "ohos": [
       "ohos-attachment-publication.diff",
