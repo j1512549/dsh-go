@@ -47,6 +47,7 @@ zzzzzzz-time-zone-dedup.diff
 zzzzzzz-web-fetch-redirect-cleanup.diff
 zzzzzzz-workspace-observation-queue.diff
 zzzzzzzz-model-defaults.diff
+zzzzzzzz-schedule-authorization.diff
 zzzzzzzzz-credentials-disposal.diff
 zzzzzzzzz-developer-header-lookup.diff
 zzzzzzzzz-job-result-bytes.diff
@@ -72,10 +73,12 @@ zzzzzzzzzz-plugin-update-selection.diff
 zzzzzzzzzz-session-export-descendant-refs.diff
 zzzzzzzzzz-terminal-readiness-clock.diff
 zzzzzzzzzz-workspace-watch-error.diff
+zzzzzzzzzzz-plugin-operations-log-utf8.diff
 zzzzzzzzzzz-plugin-update-precondition.diff
 zzzzzzzzzzzz-plan-pending-restore.diff
 zzzzzzzzzzzz-plugin-update-hmr-selection.diff
 zzzzzzzzzzzzz-plan-failed-command-pending.diff
+zzzzzzzzzzzzz-plugin-update-hmr-precondition.diff
 zzzzzzzzzzzzzz-plugin-manager-lock-lifetime.diff
 zzzzzzzzzzzzzzz-read-line-surrogate.diff
 zzzzzzzzzzzzzzz-workflow-result-unicode.diff
@@ -83,6 +86,7 @@ zzzzzzzzzzzzzzzz-read-line-cr-truncation.diff
 zzzzzzzzzzzzzzzzz-web-fetch-unicode.diff
 zzzzzzzzzzzzzzzzzz-skill-catalog-unicode.diff
 zzzzzzzzzzzzzzzzzzz-fs-text-bom.diff
+zzzzzzzzzzzzzzzzzzzz-session-list-isolation.diff
 zzzzzzzzzzzzzzzzzzzzz-turn-outline-unicode.diff
 zzzzzzzzzzzzzzzzzzzzzz-context-summary-unicode.diff
 zzzzzzzzzzzzzzzzzzzzzzz-image-display-name-unicode.diff
@@ -90,6 +94,7 @@ zzzzzzzzzzzzzzzzzzzzzzzz-ralph-result-unicode.diff
 zzzzzzzzzzzzzzzzzzzzzzzzz-repeat-json-own-key.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzz-repeat-preview-unicode.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzzz-json-equality-own-keys.diff
+zzzzzzzzzzzzzzzzzzzzzzzzzzz-workspace-recovery-index.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzzzz-tool-result-codepoint-count.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzz-attachment-staging-error.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-reference-retention-size.diff
@@ -128,6 +133,7 @@ deepseek-attachment-error.diff
 fork-default-effort.diff
 config-editor-lock-order.diff
 piai-overflow-output-limit.diff
+schedule-authorization-availability.diff
 deepseek-refusal.diff
 deepseek-unnamed-stream-error.diff
 profile-root-installation-precedence.diff
