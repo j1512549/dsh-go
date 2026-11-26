@@ -450,6 +450,8 @@ PYEOF
   log "patching DSH (runtime/patches, pinned for $DSH_VERSION)"
   "${PY[@]}" patch-dsh --prefix "$prefix" --dsh-version "$DSH_VERSION" --target android --patches "$HERE/patches" \
     --out "$work/dsh-patches.json" --target-report "$work/dsh-patch-target.json" >&2
+  log "applying extra bundle edits (runtime/patches-extra)"
+  node "$HERE/patches-extra/apply.mjs" "$prefix" >&2
   local bridge="$HERE/bridge/dsh-go-bridge"
   local bridge_version
   bridge_version="$(python3 -I -c 'import json,sys; print(json.load(open(sys.argv[1]))["version"])' "$bridge/package.json")"
