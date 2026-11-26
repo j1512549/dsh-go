@@ -2939,6 +2939,46 @@
           "before": "fae78e29381fec669b6abdd5a2597c7cf485cad7f085361876edbd4acc0e32b9"
         }
       }
+    },
+    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-phone-caller.diff": {
+      "0.2.2-rc.5": {
+        "node_modules/@deepseek-ai/dsh-tool-executor-ptc/lib/index.js": {
+          "after": "d40583d98afede310188a4c4fa343a999d84dc670fd8206be11ea34e3951c4f2",
+          "before": "ce5425f21f6da7eaf5d660979d4e69159f47446f612ccf9553d4e2636a30d86a"
+        },
+        "node_modules/@deepseek-ai/dsh-tools/lib/types/batch.js": {
+          "after": "dc556cd5a3cbd9cdc48b1e9d161baefc29ca5990609d590171c90e2792058fd7",
+          "before": "fc31ae28425535a39eb2fa0b17d14294b186cea0e3a7951333cccbc6e6f07c3b"
+        },
+        "node_modules/@deepseek-ai/dsh-tools/lib/types/contracts.d.ts": {
+          "after": "f51b4ddd78e0a82552b84303c2621b173330cd2ba41e4b9ee7fe55b690a39192",
+          "before": "1fd69b43c0062cfaf46bbdb76c11cdff26bfc03361ad6922923e509c8448deb7"
+        },
+        "node_modules/@deepseek-ai/dsh-tools/lib/types/events.d.ts": {
+          "after": "2a8c42015d2cf4f276ce1ddc507e87ed03353a34b45d64fe45639333489941a4",
+          "before": "d9b88e373fb94f038c2ee76a30c45fdcd34bd8cca39cef7cd09a8d56de352ac9"
+        },
+        "node_modules/@deepseek-ai/dsh-tools/lib/types/pipeline.js": {
+          "after": "2a59475dfd4a5924be81a64e86025bb83782df99629b0ab43897af3dd27fbf90",
+          "before": "7124b0e658b0719d84dde773883fbb44675c11f39176936f0c75c3ecf66e8301"
+        }
+      }
+    },
+    "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-phone-run-end.diff": {
+      "0.2.2-rc.5": {
+        "node_modules/@deepseek-ai/dsh-mcp-client/lib/index.js": {
+          "after": "0c24a737c72b955df4e4daf78db45359c000e76033ef763d47792209bb686da8",
+          "before": "879b2364e28563626697dd5e3dcf64dcae61dd215dc8f21b283cb7616a672bde"
+        },
+        "node_modules/@deepseek-ai/dsh-mcp-client/lib/types/index.d.ts": {
+          "after": "2155303d733985296378bba9f74558c783791ec62d9454588adbdd7c6108b8eb",
+          "before": "653f5a0511f31e78cbdef9e71aa40ea55ec890029b3c1a2ccd811962b976a172"
+        },
+        "node_modules/@deepseek-ai/dsh-mcp-client/lib/types/tools.d.ts": {
+          "after": "bad4e5488fc1f002dd10218541ec13592b2a31c3fe14ef0a31632acb2945c83c",
+          "before": "03adc463bb365dc4cd3617f751508a6729bd4d42eb498e012a5a2444e2ddf4bf"
+        }
+      }
     }
   },
   "schema": 2,
@@ -3082,7 +3122,9 @@
       "schedule-authorization-availability.diff",
       "deepseek-refusal.diff",
       "deepseek-unnamed-stream-error.diff",
-      "profile-root-installation-precedence.diff"
+      "profile-root-installation-precedence.diff",
+      "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-phone-caller.diff",
+      "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-phone-run-end.diff"
     ],
     "ohos": [
       "ohos-attachment-publication.diff",
