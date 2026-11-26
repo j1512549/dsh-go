@@ -55,11 +55,25 @@ const edits = [
 		to: "const noReplied=useChat(snapshot=>{const turnRef=node.location.kind===`turn`||node.location.kind===`step`?node.location.turn:void 0;if(turnRef===void 0||turnRef.status!==`closed`||turnRef.end?.data.reason.kind!==`completed`)return false;const keys=snapshot.locations.getTurn(turnRef);for(const key of keys){const candidate=snapshot.nodes.get(key);if(candidate?.kind===`assistant-step`&&hasAssistantReplyContent(candidate.data.blocks))return false}return true});const notice=noReplied?(0,react_jsx_runtime.jsx)(`div`,{role:`status`,\"data-turn-no-reply\":true,children:t(`message.turnNoReply`)}):null;if(closing===null)return tail===null&&notice===null?null:(0,react_jsx_runtime.jsxs)(`div`,{className:TurnTailNodeView_module_css_default.root,\"data-turn-tail\":data.turn,children:[notice,tail]});"
 	},
 	{
+		name: "provider-discovery-headers",
+		file: "node_modules/@deepseek-ai/dsh-api-remotes/lib/client.js",
+		count: 2,
+		from: "describe(`Credential for this interrogation alone; the harness never stores it.`)});",
+		to: "describe(`Credential for this interrogation alone; the harness never stores it.`),\"headers\":zod.z.array(zod.z.object({\"name\":zod.z.string(),\"value\":zod.z.string()})).optional().describe(`Request headers for this interrogation only; omission uses the stored profile, and an empty list clears it.`)});"
+	},
+	{
 		name: "web-search-key-write-result",
 		file: "node_modules/@deepseek-ai/dsh-client-ui-settings-web-search/lib/client.js",
 		from: "async writeKey(value){const ref=this.savingRef;await this.ctx.remote.credentials.set(ref,value);return(await this.readCredential(ref))?.[ref]?.configured??false}",
 		to: "async writeKey(value){const ref=this.savingRef;const result=await this.ctx.remote.credentials.set(ref,value);if(!result.ok)return false;return(await this.readCredential(ref))?.[ref]?.configured??false}"
-	}
+	},
+	{"name": "provider-headers-zod:typert.host.js", "file": "node_modules/@deepseek-ai/dsh-llm/lib/typert.host.js", "count": 2, "from": "'apiKey': z.string().optional().describe('Credential for this interrogation alone; the harness never stores it.'),\n}))", "to": "'apiKey': z.string().optional().describe('Credential for this interrogation alone; the harness never stores it.'),\n  'headers': z.array(z.object({\n  'name': z.string(),\n  'value': z.string(),\n})).optional().describe('Request headers for this interrogation only; omission uses the stored profile, and an empty list clears it.'),\n}))"},
+	{"name": "provider-headers-jsonschema:typert.host.js:true", "file": "node_modules/@deepseek-ai/dsh-llm/lib/typert.host.js", "from": "\"apiKey\":{\"type\":\"string\",\"description\":\"Credential for this interrogation alone; the harness never stores it.\"}},\"required\":[],\"additionalProperties\":true},", "to": "\"apiKey\":{\"type\":\"string\",\"description\":\"Credential for this interrogation alone; the harness never stores it.\"},\"headers\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}},\"required\":[\"name\",\"value\"],\"additionalProperties\":true},\"description\":\"Request headers for this interrogation only; omission uses the stored profile, and an empty list clears it.\"}},\"required\":[],\"additionalProperties\":true},"},
+	{"name": "provider-headers-jsonschema:typert.host.js:false", "file": "node_modules/@deepseek-ai/dsh-llm/lib/typert.host.js", "from": "\"apiKey\":{\"type\":\"string\",\"description\":\"Credential for this interrogation alone; the harness never stores it.\"}},\"required\":[],\"additionalProperties\":false},", "to": "\"apiKey\":{\"type\":\"string\",\"description\":\"Credential for this interrogation alone; the harness never stores it.\"},\"headers\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}},\"required\":[\"name\",\"value\"],\"additionalProperties\":false},\"description\":\"Request headers for this interrogation only; omission uses the stored profile, and an empty list clears it.\"}},\"required\":[],\"additionalProperties\":false},"},
+	{"name": "provider-headers-zod:typert.remote-client.js", "file": "node_modules/@deepseek-ai/dsh-llm/lib/typert.remote-client.js", "count": 2, "from": "'apiKey': z.string().optional().describe('Credential for this interrogation alone; the harness never stores it.'),\n}))", "to": "'apiKey': z.string().optional().describe('Credential for this interrogation alone; the harness never stores it.'),\n  'headers': z.array(z.object({\n  'name': z.string(),\n  'value': z.string(),\n})).optional().describe('Request headers for this interrogation only; omission uses the stored profile, and an empty list clears it.'),\n}))"},
+	{"name": "provider-headers-jsonschema:typert.remote-client.js:true", "file": "node_modules/@deepseek-ai/dsh-llm/lib/typert.remote-client.js", "from": "\"apiKey\":{\"type\":\"string\",\"description\":\"Credential for this interrogation alone; the harness never stores it.\"}},\"required\":[],\"additionalProperties\":true},", "to": "\"apiKey\":{\"type\":\"string\",\"description\":\"Credential for this interrogation alone; the harness never stores it.\"},\"headers\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}},\"required\":[\"name\",\"value\"],\"additionalProperties\":true},\"description\":\"Request headers for this interrogation only; omission uses the stored profile, and an empty list clears it.\"}},\"required\":[],\"additionalProperties\":true},"},
+	{"name": "provider-headers-jsonschema:typert.remote-client.js:false", "file": "node_modules/@deepseek-ai/dsh-llm/lib/typert.remote-client.js", "from": "\"apiKey\":{\"type\":\"string\",\"description\":\"Credential for this interrogation alone; the harness never stores it.\"}},\"required\":[],\"additionalProperties\":false},", "to": "\"apiKey\":{\"type\":\"string\",\"description\":\"Credential for this interrogation alone; the harness never stores it.\"},\"headers\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"name\":{\"type\":\"string\"},\"value\":{\"type\":\"string\"}},\"required\":[\"name\",\"value\"],\"additionalProperties\":false},\"description\":\"Request headers for this interrogation only; omission uses the stored profile, and an empty list clears it.\"}},\"required\":[],\"additionalProperties\":false},"},
+	{"name": "provider-headers-pi-ai", "file": "node_modules/@deepseek-ai/dsh-llm-pi-ai/lib/index.js", "from": "\t\tconst headers = new Headers(stored?.headers === void 0 ? void 0 : Object.entries(stored.headers));", "to": "\t\tconst configuredHeaders = request.headers?.map(({ name, value }) => [name, value]) ?? (stored?.headers === void 0 ? void 0 : Object.entries(stored.headers));\n\t\tconst headers = new Headers(configuredHeaders);"},
 ];
 
 let applied = 0;
@@ -67,11 +81,12 @@ for (const edit of edits) {
 	const path = join(root, edit.file);
 	const text = readFileSync(path, "utf8");
 	const hits = text.split(edit.from).length - 1;
-	if (hits !== 1) {
-		console.error(`extra edit ${edit.name}: anchor occurs ${hits} times in ${edit.file}`);
+	const expected = edit.count ?? 1;
+	if (hits !== expected) {
+		console.error(`extra edit ${edit.name}: anchor occurs ${hits} times in ${edit.file}, expected ${expected}`);
 		process.exit(1);
 	}
-	writeFileSync(path, text.replace(edit.from, edit.to));
+	writeFileSync(path, edit.count === undefined ? text.replace(edit.from, edit.to) : text.split(edit.from).join(edit.to));
 	applied += 1;
 	console.log(`extra edit ${edit.name}: applied`);
 }
