@@ -1,6 +1,3 @@
-# One patch per line, in application order. Keep every .diff exactly once.
-# HarmonyOS-only overlays (pins.json targetSets.ohos), after the whole common chain.
-
 cordis-effect-dispose-completion.diff
 credentials-decimal-refs.diff
 fs-create-exclusive.diff
@@ -8,6 +5,7 @@ install-log-redaction.diff
 piai-anthropic-opus55-thinking.diff
 piai-google-openai-store.diff
 plugin-manager-active-run-guard.diff
+plugin-manager-cancel-tree-confirmation.diff
 preset-legacy-delegation.diff
 route-guard.diff
 client-hmr-closed-response.diff
@@ -20,6 +18,7 @@ zzz-fs-replace-all-count.diff
 zzz-title-cache-refresh.diff
 zzzz-plugin-config-readability.diff
 zzzzz-plugin-config-bundles.diff
+zzzzzz-session-deletion.diff
 zzzzzzz-atomic-claim-write-failure.diff
 zzzzzzz-atomic-lock-write-failure.diff
 zzzzzzz-bundle-membership.diff
@@ -27,6 +26,7 @@ zzzzzzz-domain-owner-dispose.diff
 zzzzzzz-file-query-normalization.diff
 zzzzzzz-file-reference-owner-dispose.diff
 zzzzzzz-grep-retention-preview.diff
+zzzzzzz-input-recovery.diff
 zzzzzzz-job-follow-removal.diff
 zzzzzzz-job-ring-trim.diff
 zzzzzzz-jsonl-root-check-retry.diff
@@ -48,6 +48,7 @@ zzzzzzz-web-fetch-redirect-cleanup.diff
 zzzzzzz-workspace-observation-queue.diff
 zzzzzzzz-model-defaults.diff
 zzzzzzzzz-credentials-disposal.diff
+zzzzzzzzz-developer-header-lookup.diff
 zzzzzzzzz-job-result-bytes.diff
 zzzzzzzzz-materialize-temp.diff
 zzzzzzzzz-plugin-detail-body-cancel.diff
@@ -66,11 +67,14 @@ zzzzzzzzz-subprocess-zzzero-tail.diff
 zzzzzzzzz-terminal-tail.diff
 zzzzzzzzz-tool-history-lookup.diff
 zzzzzzzzz-workspace-domain-close.diff
+zzzzzzzzzz-plugin-manager-log-write-all.diff
+zzzzzzzzzz-plugin-update-selection.diff
 zzzzzzzzzz-session-export-descendant-refs.diff
 zzzzzzzzzz-terminal-readiness-clock.diff
 zzzzzzzzzz-workspace-watch-error.diff
 zzzzzzzzzzz-plugin-update-precondition.diff
 zzzzzzzzzzzz-plan-pending-restore.diff
+zzzzzzzzzzzz-plugin-update-hmr-selection.diff
 zzzzzzzzzzzzz-plan-failed-command-pending.diff
 zzzzzzzzzzzzzz-plugin-manager-lock-lifetime.diff
 zzzzzzzzzzzzzzz-read-line-surrogate.diff
@@ -97,6 +101,7 @@ fs-create-link-denial.diff
 fs-publication-short-names.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-fs-patch-equal-width.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-instruction-encoding-reuse.diff
+zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-str-editor-bom.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-sqlite-document-count.diff
 zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-session-lifecycle-enumeration.diff
 jsonl-materialize-rename.diff

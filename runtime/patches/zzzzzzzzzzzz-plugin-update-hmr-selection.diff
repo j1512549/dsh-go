@@ -1,0 +1,39 @@
+--- a/node_modules/@deepseek-ai/dsh-plugin-manager/lib/index.js
++++ b/node_modules/@deepseek-ai/dsh-plugin-manager/lib/index.js
+@@ -2773,7 +2773,7 @@
+ 			const planned = target.kind === "git" ? this.planGitUpdate(name, target.origin, options) : await this.checkRegistryUpdate(name, version, options);
+ 			if ("code" in planned) return refusedBefore(planned);
+ 			const { spec, registry, saveExact } = planned;
+-			const { enabled } = bundle;
++			let { enabled } = bundle;
+ 			const settled = (stage, target, operation) => operation.catch((error) => ({
+ 				changed: false,
+ 				application: "failed",
+@@ -2821,7 +2821,9 @@
+ 			};
+ 			const previousRegistry = this.installedFrom.get(name);
+ 			announce("removing");
+-			const removal = await settled("remove", name, this.removeBundle(name));
++			const selection = { enabled };
++			const removal = await settled("remove", name, this.removeBundle(name, selection));
++			enabled = selection.enabled;
+ 			if (removal.application === "failed" || removal.application === "cancelled") return {
+ 				from,
+ 				to: version,
+@@ -3300,13 +3302,15 @@
+ 		* @param name Installed dependency or selected bundle name.
+ 		* @returns Removal diagnostics and the remaining profile state.
+ 		*/
+-		removeBundle(name) {
++		// selection is owned by this update only; capture it before HMR deselects.
++		removeBundle(name, selection) {
+ 			return this.change(async (result) => {
+ 				if (!await this.configure(async () => {
+ 					const bundle = (await this.listBundles()).find((item) => item.name === name);
+ 					if (bundle === void 0 || !bundle.removable) throw new ManagementFailure("not-removable");
+ 					if (this.ownerContext.get("hmr") === void 0 && (this.profile.startedBundles.includes(name) || bundle.error === void 0 && this.bundleRows(name).some((row) => [...this.ctx.loader.entries()].some((entry) => entry.options.id === row.id && entry.fiber !== void 0)))) throw new ManagementFailure("stop-profile");
+ 					const contributions = bundle.error === void 0 ? this.bundleRows(name) : [];
++					if (selection !== void 0) selection.enabled = bundle.enabled;
+ 					if (bundle.enabled) {
+ 						await this.selectBundle(name, false);
+ 						Object.assign(result, await this.reload());
